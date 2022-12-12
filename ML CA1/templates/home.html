@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Price Prediction</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <style>
+        body {
+          /* background-image: url('static/img/img3.jpg'); */
+          background-image: url({{ url_for('static', filename='img/img3.jpg') }} );
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+
+        table, th, td {
+            border:2px solid black;
+        }
+        </style>
+</head>
+<body>
+    <!-- <p style="background-image: url('img1.jpg');"></p> -->
+    <span align="center">
+
+     <h1 style="color: rgb(52, 68, 90);">  Flight Price Prediction</h1>
+    </span>
+    <form action="{{ url_for('predict')}}" method="post">
+    <table align="Center">
+    
+        <tr>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp;  Airline &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Departure Time  &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Stops &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Arrival Time &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Destinition City &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Source City &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Class &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Duration &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp; Days left &nbsp;&nbsp;&nbsp;&nbsp; </td>
+            
+        </tr>
+        <tr>
+            <td> 
+                <select name="airline" id="airline" required>
+                    <option value="">Select</option>
+                    <option value="SpiceJet">SpiceJet</option>
+                    <option value="AirAsia">AirAsia</option>
+                    <option value="Vistara">Vistara</option>
+                    <option value="GO_FIRST">GO_FIRST</option>
+                    <option value="Indigo">Indigo</option>
+                    <option value="Air_India">Air_India</option>
+                </select>    
+            </td>
+            <td> 
+                <select name="departure_time" id="departure_time" required>
+                    <option value="">Select</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Early_Morning">Early_Morning</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Night">Night</option>
+                    <option value="Late_Night">Late_Night</option>
+                </select> 
+            </td>
+            <td> 
+                <select name="stops" id="stops" required>
+                    <option value="">Select</option>
+                    <option value="zero">zero</option>
+                    <option value="one">one</option>
+                    <option value="two_or_more">two_or_more</option>
+                    
+                </select> 
+            </td>
+            <td> 
+                <select name="arrival_time" id="arrival_time" required>
+                    <option value="">Select</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Early_Morning">Early_Morning</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Night">Night</option>
+                    <option value="Late_Night">Late_Night</option>
+                </select>     
+            </td>
+            <td> 
+                <select name="destination_city" id="destination_city" required>
+                    <option value="">Select</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Delhi">Delhi</option>
+                </select>       
+            </td>
+
+            <td> 
+                <select name="source_city" id="source_city" required>
+                    <option value="">Select</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Delhi">Delhi</option>
+                </select>       
+            </td>
+
+            <td> 
+                <select name="class" id="class" required>
+                    <option value="">Select</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Business">Business</option>
+                   
+                </select>     
+            </td>
+            <td> <input type="number" id="duration" name="duration" min="0" max="50" required> </td>
+            <td> <input type="number" id="days_left" name="days_left" min="1" max="50" required> </td>
+
+        </tr>
+
+
+    
+    </table>
+
+
+    <span align ="center"> 
+        <p>
+            <button type="submit" class="'btn btn-primary btn-block btn-large"> &nbsp;&nbsp;&nbsp;&nbsp; Predict the Price &nbsp;&nbsp;&nbsp;&nbsp; </button>
+        </p>
+    </span>
+
+
+
+    <span align="Center">
+        <h2 style="color: rgb(159, 14, 4);">
+            {{ prediction_text }}
+        </h4>
+    </span>
+</form>
+</body>
+</html>
