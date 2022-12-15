@@ -3,7 +3,8 @@ import pandas as pd
 from flask import Flask,request,render_template
 import pickle
 import logging as log
-
+from datetime import date, datetime
+import datetime as dt
 
 
 app = Flask(__name__)
@@ -65,7 +66,15 @@ def predict():
     SCity = features[5]
     classType = features[6]
     Duration = features[7]
-    Dleft = features[8]
+    fligtDate = features[8]
+
+    fligtDate =  datetime.strptime(fligtDate, '%Y-%m-%d')
+    today = date.today()
+
+    if today.day > fligtDate.day:
+        return render_template('home.html',prediction_text='Flight date cannot be past Date')
+
+    Dleft = fligtDate.day-today.day
 
     try:
         lst.append(float(Duration))
@@ -95,13 +104,14 @@ def predict():
     log.warning('<-----Values of List are------->',lst)
     df.loc[len(df)] = lst    
     prediction = model.predict(df)
+    print(type(prediction))
 
 
 
-    log.warning('<----------------Prediction value-------->',prediction)
-    return render_template('home.html',prediction_text='Price of Ticket Should be: {}'.format(prediction))
+    log.warning('<----------------Prediction value-------->',prediction[0])
+    return render_template('home.html',prediction_text='Price of Ticket Should be: {} INR'.format(prediction[0]))
     
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, host='0.0.0.0', port='5000')
 
