@@ -9,6 +9,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get install python3-pip -y
 sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
 sudo apt-get install git -y
+git clone https://github.com/Omkar0017/ML_Deployment.git
 sudo apt install python3-venv -y
 cd /ML_Deployment/ML\ CA1/
 python3 -m venv ML\ CA1/
